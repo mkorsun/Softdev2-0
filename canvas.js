@@ -1,40 +1,40 @@
 var c = document.getElementById("slate");
 var ctx = c.getContext("2d");
 
-var clear = function() {
+var clears = function() {
     ctx.beginPath();
     ctx.clearRect(0,0,500,500);
 }
 
-var cbutton = document.getElementById("clear");
-cbutton.addEventListener("click", clear);
+var cbutton = clear.addEventListener("click", clears);
 
 var shape = 1;
-var toggle = function() {
+var toggles = function(e) {
     if (shape == 1){
-	var shape = 2;
+	shape = 2;
     }
-    if (shape ==2) {
-	var shape = 1;
+    else{
+	shape = 1;
     }
 }
 
-var tbutton = document.getElementById("toggle");
-tbutton.addEventListener("click",toggle);
+var tbutton = toggle.addEventListener("click",toggles);
 
 var draw = function(e) {
-    var x = e.ClientX - 7;
-    var y = e.ClientY - 77;
+    var x = e.clientX - 5;
+    var y = e.clientY - 3;
     ctx.beginPath();
     if (shape == 1) {
 	ctx.arc(x, y, 25, 0, 2*Math.PI);
     }
     if (shape == 2){
-	ctx.fillRect(x,y,30,15);
+	x=x-25;
+	y=y-25
+	ctx.fillRect(x,y,50,50);
     }
     ctx.stroke();
     ctx.fill();
     console.log("asdf");
 }
 
-c.addEventListener("click", draw);
+slate.addEventListener("click", draw);
