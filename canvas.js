@@ -41,8 +41,8 @@ var draw = function(e) {
     }
     else {
 	ctx.beginPath();
-	moveTo(x,y);
-	lineTo(prevX,prevY);
+	ctx.moveTo(x,y);
+	ctx.lineTo(prevX,prevY);
 	prevX = x;
 	prevY= y;
     }	
