@@ -4,6 +4,8 @@ var ctx = c.getContext("2d");
 var clears = function() {
     ctx.beginPath();
     ctx.clearRect(0,0,500,500);
+    prevX = -1;
+    prevY = -1;
 }
 
 var cbutton = clear.addEventListener("click", clears);
@@ -19,21 +21,32 @@ var toggles = function(e) {
 }
 
 var tbutton = toggle.addEventListener("click",toggles);
-
+var prevX = -1;
+var prevY = -1;
 var draw = function(e) {
-    var x = e.clientX - 5;
-    var y = e.clientY - 3;
+    var x = e.offsetX;
+    var y = e.offsetY;
     ctx.beginPath();
     if (shape == 1) {
 	ctx.arc(x, y, 25, 0, 2*Math.PI);
     }
-    if (shape == 2){
-	x=x-25;
-	y=y-25
+    else {
 	ctx.fillRect(x,y,50,50);
     }
     ctx.stroke();
     ctx.fill();
+    if (prevX == -1){
+	prevX = x;
+	prevY = y;
+    }
+    else {
+	ctx.beginPath();
+	moveTo(x,y);
+	lineTo(prevX,prevY);
+	prevX = x;
+	prevY= y;
+    }	
+    ctx.stroke();
     console.log("asdf");
 }
 
