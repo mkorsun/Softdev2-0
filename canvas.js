@@ -9,15 +9,32 @@ var clear = function() {
 var cbutton = document.getElementById("clear");
 cbutton.addEventListener("click", clear);
 
+var shape = 1;
+var toggle = function() {
+    if (shape == 1){
+	var shape = 2;
+    }
+    if (shape ==2) {
+	var shape = 1;
+    }
+}
+
 var tbutton = document.getElementById("toggle");
 tbutton.addEventListener("click",toggle);
 
-var circle = function(e) {
+var draw = function(e) {
+    var x = e.ClientX - 7;
+    var y = e.ClientY - 77;
     ctx.beginPath();
-    ctx.arc(e.ClientX, e.ClientY, 25, 0, 2*Math.PI);
+    if (shape == 1) {
+	ctx.arc(x, y, 25, 0, 2*Math.PI);
+    }
+    if (shape == 2){
+	ctx.fillRect(x,y,30,15);
+    }
     ctx.stroke();
     ctx.fill();
     console.log("asdf");
 }
 
-c.addEventListener("click", circle);
+c.addEventListener("click", draw);
